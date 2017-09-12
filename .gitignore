@@ -1,7 +1,6 @@
 .DS_Store
 node_modules/
 npm-debug.log
-platform.rsa
-platform.rsa.pub
+yuanyuan.rsa
+yuanyuan.rsa.pub
 .idea
-
