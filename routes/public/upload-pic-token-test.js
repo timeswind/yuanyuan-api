@@ -1,3 +1,4 @@
+var privateSettings = require("../../config/Private-settings");
 var createS3Policy = require("../../lib/aws/createS3Policy");
 
 exports.get = function* () {
