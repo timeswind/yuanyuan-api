@@ -5,7 +5,7 @@ var ObjectId = Schema.Types.ObjectId;
 
 var UserSchema = new Schema({
   name: { type: String, required: true },
-  email: { type: String, required: true },
+  email: { type: String, required: true, unique: true},
   verify: { type: Boolean, default: false },
   password: { type: String, required: true },
   school: { type: String, required: true }, // 'psu'

@@ -13,8 +13,12 @@ exports.post = function* () {
     errors.school = "填写学校"
   } else if (!postData.name) {
     errors.name = "填写姓名"
-  } else if (!postData.email) {
-    errors.email = '填写邮箱'
+  } else if (!postData.schoolemail) {
+    errors.schoolemail = '填写学校邮箱'
+  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(postData.schoolemail)) {
+    errors.schoolemail = '邮箱格式错误, 请以@psu.edu结尾'
+  } else if (!postData.schoolemail.endsWith('@psu.edu')) {
+    errors.schoolemail = '请以@psu.edu结尾'
   }
 
   if (Object.keys(errors).length !== 0) {
@@ -25,7 +29,7 @@ exports.post = function* () {
     }
   } else {
 
-    var findExistUser = yield $User.getUserByEmail(postData.email)
+    var findExistUser = yield $User.getUserByEmail(postData.schoolemail)
 
     if (findExistUser) {
       this.status = 400
@@ -37,9 +41,9 @@ exports.post = function* () {
       var newUserData = {
         school: postData.school,
         name: postData.name,
-        email: postData.email,
+        email: postData.schoolemail,
         password: $User.generateHash(postData.password),
-        role: 2,
+        role: 1,
       };
 
       var newUser = yield $User.addUser(newUserData);
