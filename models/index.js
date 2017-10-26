@@ -11,6 +11,8 @@ mongoose.connect(config.mongodb.developmentUrl, function (err) {
 
 exports.User = require('./User');
 exports.Article = require('./Article');
+exports.CardTemplate = require('./CardTemplate');
+exports.Card = require('./Card');
 // exports.List = require('./List');
 // exports.Client = require('./Client');
 // exports.Emailverify = require('./Emailverify');

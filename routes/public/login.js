@@ -33,6 +33,7 @@ exports.post = function* () {
     role: userInfo.role,
     school: userInfo.school,
     permissions: userInfo.permissions || [],
+    avatar: userInfo.avatar,
     token: token
   };
 };

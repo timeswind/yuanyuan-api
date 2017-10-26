@@ -385,6 +385,7 @@ function checkSignupBody() {
 }
 
 function checkLoginBody() {
+  console.log(this.request.body)
   var body = this.request.body;
   var respond;
   if (!body || !body.email) {
