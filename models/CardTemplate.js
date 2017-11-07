@@ -4,7 +4,8 @@ var ObjectId = Schema.Types.ObjectId;
 
 var CardTemplateSchema = new Schema({
   issuer: { type: ObjectId, ref: 'User', required: true},
-  type: { type: String, require: true }, //cardType: membership,
+  school: { type: String, required: true},
+  type: { type: String, required: true }, //cardType: membership,
   name: { type: String, required: true }, // cardName
   image: { type: String }, // card background image
   limits: { type: Number, default: 0 }, // limit number of cards can be issued

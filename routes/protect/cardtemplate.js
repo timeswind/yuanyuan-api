@@ -5,6 +5,8 @@ var $CardTemplate = Models.$CardTemplate;
 exports.post = function* () {
   var newCardTemplateData = this.request.body
   newCardTemplateData['issuer'] = this.state.user.id
+  newCardTemplateData['school'] = this.state.user.school
+  newCardTemplateData['type'] = 'membership'
 
   var newCardTemplate = yield $CardTemplate.newCardTemplate(newCardTemplateData)
 

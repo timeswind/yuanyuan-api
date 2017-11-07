@@ -1,6 +1,5 @@
 var app = require('koa')();
-// var raven = require('raven');
-// var sentry = new raven.Client('https://b03d70e23cb849e1aa7c90f17fb9ace0:81af625093254b92b6e92bb8469e3818@sentry.io/101580');
+var Raven = require('raven');
 var logger = require('koa-logger');
 var bodyparser = require('koa-bodyparser');
 var errorhandler = require('koa-errorhandler');
@@ -17,9 +16,13 @@ var publicKey = require('fs').readFileSync(config.publicKeyName);
 
 app.use(checkToken());
 
-// app.on('error', function(err, context) {
-//   sentry.captureException(err, context);
-// });
+Raven.config('https://f8ae759bf75340c9a32e19d52e325415:1a8ed05c6cf0420cafa4b419d734e5f3@sentry.io/238080').install();
+
+app.on('error', function (err) {
+    Raven.captureException(err, function (err, eventId) {
+        console.log('Reported error ' + eventId);
+    });
+});
 
 app.use(jwt({ secret: publicKey, algorithm: 'RS256' }).unless({ path: [/^\/socket\.io/, /^\/public/] }));
 app.use(internalPermissionCheck());
