@@ -6,6 +6,7 @@ var CardSchema = new Schema({
   template: { type: ObjectId, ref: 'CardTemplate', required: true },
   holder: { type: ObjectId, ref: 'User', require: true },
   number: { type: Number, require: true },
+  disable: { type: Boolean, default: false },
   created_at: { type: Date, default: Date.now },
   updated_at: { type: Date, default: Date.now }
 });
