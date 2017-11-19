@@ -1,6 +1,7 @@
 var Models = require('../../lib/core');
 // var _ = require('lodash');
 var $CardTemplate = Models.$CardTemplate;
+var $Card = Models.$Card;
 
 exports.post = function* () {
   var newCardTemplateData = this.request.body
@@ -27,12 +28,15 @@ exports.post = function* () {
 
 exports.get = function* () {
   var card_template_id = this.request.query.id
+  var user_id = this.state.user.id
   var cardtemplate = yield $CardTemplate.findOneById(card_template_id)
-  if (cardtemplate) {
+  if (cardtemplate && cardtemplate.issuer == user_id) {
+    var cards = yield $Card.getRegistedCardByTemplateId(card_template_id)
     this.status = 200;
     this.body = {
       success: true,
-      cardtemplate: cardtemplate
+      cardtemplate: cardtemplate,
+      cards: cards
     };
   } else {
     this.status = 404;
