@@ -26,6 +26,31 @@ exports.post = function* () {
   }
 };
 
+exports.put = function* () {
+  var updatedCardTemplateData = this.request.body
+  if ('id' in updatedCardTemplateData) {
+    const cardtemplateId = updatedCardTemplateData.id
+    var updatedCardtemplate = yield $CardTemplate.updateCardtemplate(cardtemplateId, {
+      name: updatedCardTemplateData['name'],
+      description: updatedCardTemplateData['description'],
+      image: updatedCardTemplateData['image']
+    })
+    if (updatedCardtemplate) {
+      this.status = 200
+      this.body = {
+        success: true,
+        updatedCardtemplate: updatedCardtemplate
+      }
+    } else {
+      this.status = 500
+      this.body = {
+        success: false,
+        error: 'Fail to update card template'
+      }
+    }
+  }
+};
+
 exports.get = function* () {
   var card_template_id = this.request.query.id
   var user_id = this.state.user.id
