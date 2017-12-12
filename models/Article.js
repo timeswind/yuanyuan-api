@@ -6,6 +6,8 @@ var ArticleSchema = new Schema({
   user: { type: ObjectId, ref: 'User', required: true},
   school: { type: String },
   title: { type: String, required: true },
+  author: { type: String, required: false },
+  cover: { type: String, required: false },
   content: { type: String, required: true },
   views: { type: Number },
   tags: { type: [String] },
