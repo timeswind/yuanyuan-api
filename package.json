@@ -28,7 +28,7 @@
     "koa-socket.io": "^1.1.2",
     "koa-static": "^4.0.1",
     "koa.io": "0.0.3",
-    "lodash": "^4.17.4",
+    "lodash": "^4.17.13",
     "moment": "^2.17.1",
     "mongoose": "4.8.4",
     "passport": "^0.3.2",
